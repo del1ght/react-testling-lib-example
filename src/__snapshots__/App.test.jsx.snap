@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App > simple test cases 1`] = `
+<input
+  placeholder="input value1"
+  type="text"
+/>
+`;
