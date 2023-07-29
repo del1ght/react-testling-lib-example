@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { Users } from './Users';
+import { act, render, screen } from '@testing-library/react';
 import axios from 'axios';
+import { describe, expect, it, vi } from 'vitest';
+import { Users } from './Users';
 
 vi.mock('axios');
 
@@ -22,10 +22,9 @@ describe('Users test', () => {
   it('getUsers', async () => {
     axios.get.mockReturnValue(response);
     render(<Users />);
+    await act(() => Promise.resolve());
     const users = await screen.findAllByTestId('user-item');
     expect(axios.get).toBeCalledTimes(1);
-
-    // why users.length is equal to 1 ??? screen.debug shows correct markup with 2 elements
     expect(users.length).toBe(2);
     screen.debug();
   });
