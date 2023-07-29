@@ -4,6 +4,7 @@ import { Button } from './components/Button/Button';
 import { Input } from './components/Input/Input';
 import { Text } from './components/Text/Text';
 import { Wait } from './components/Wait/Wait';
+import { Users } from './components/Users/Users';
 
 function App() {
   const [toggle, setToggle] = useState(false);
@@ -30,6 +31,7 @@ function App() {
       <Wait />
       <Input placeholder='input value1' onChange={handleChange} type='text' />
       <p data-testid='input-text'>{value}</p>
+      <Users />
     </div>
   );
 }

@@ -1,41 +1,32 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Users } from './Users';
+import axios from 'axios';
 
-global.fetch = vi.fn();
-
-function createFetchResponse(data) {
-  return Promise.resolve({
-    json: () => Promise.resolve(data),
-  });
-}
+vi.mock('axios');
 
 describe('Users test', () => {
-  let response = [
-    {
-      id: 1,
-      name: 'Leanne Graham',
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell',
-    },
-    {
-      id: 3,
-      name: 'Clementine Bauch',
-    },
-  ];
+  let response = {
+    data: [
+      {
+        id: 1,
+        name: 'Leanne Graham',
+      },
+      {
+        id: 2,
+        name: 'Ervin Howell',
+      },
+    ],
+  };
 
-  it('getusers', async () => {
-    fetch.mockResolvedValue(createFetchResponse(response));
+  it('getUsers', async () => {
+    axios.get.mockReturnValue(response);
     render(<Users />);
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    const test = await res.json();
-    console.log(test);
+    const users = await screen.findAllByTestId('user-item');
+    expect(axios.get).toBeCalledTimes(1);
 
-    // const users = await screen.findAllByTestId('user-item');
-    // expect(fetch).toBeCalledTimes(1);
-    // expect(users.length).toBe(1);
-    // screen.debug();
+    // why users.length is equal to 1 ??? screen.debug shows correct markup with 2 elements
+    expect(users.length).toBe(2);
+    screen.debug();
   });
 });
