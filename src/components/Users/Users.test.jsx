@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 import { Users } from './Users';
@@ -28,4 +28,21 @@ describe('Users test', () => {
     expect(users.length).toBe(2);
     screen.debug();
   });
+
+  // it('users length', async () => {
+  //   axios.get.mockReturnValue(response);
+  //   render(<Users />);
+  //   screen
+  //     .findAllByTestId('user-item')
+  //     .then((users) => expect(users.length).toBe(2));
+  // });
+  // it('users length', async () => {
+  //   axios.get.mockReturnValue(response);
+  //   render(<Users />);
+
+  //   await waitFor(async () => {
+  //     const users = await screen.findAllByTestId('user-item');
+  //     expect(users.length).toBe(2);
+  //   });
+  // });
 });
