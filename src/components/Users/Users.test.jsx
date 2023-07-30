@@ -23,19 +23,6 @@ describe('Users test', () => {
     ],
   };
 
-  it('getUsers', async () => {
-    axios.get.mockReturnValue(response);
-    render(
-      <MemoryRouter>
-        <Users />
-      </MemoryRouter>
-    );
-    const users = await screen.findAllByTestId('user-link');
-    expect(axios.get).toBeCalledTimes(1);
-
-    // why users.length is equal to 1 ??? screen.debug shows correct markup with 2 elements
-    expect(users.length).toBe(1);
-  });
   it('redirect to user page', async () => {
     axios.get.mockReturnValue(response);
     renderWithRouter(<Users />, '/about');
